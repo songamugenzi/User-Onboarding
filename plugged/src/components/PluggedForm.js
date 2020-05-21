@@ -13,7 +13,7 @@ export default function PluggedForm(props) {
     return (
         <form className='form container' onSubmit={onSubmit}>
             <div className='form-group submit'>
-                <h2>Add new user</h2>
+                <h3>Add new user</h3>
                 <button disabled={disabled}>submit</button>
 
                 <div className='errors'>
@@ -24,13 +24,13 @@ export default function PluggedForm(props) {
             </div>
 
             <div className='form-group inputs'>
-                <h4>User information</h4>
+                <h3>User information</h3>
 
                 <label>Name&nbsp;
                     <input
                         value={values.name}
                         onChange={onInputChange}
-                        placeholder='Enter your name'
+                        placeholder='Enter full name'
                         name='name'
                         type='text'
                     />
@@ -58,10 +58,12 @@ export default function PluggedForm(props) {
             </div>
 
             <div className='tos checkbox'>
-                <label>Read our terms and conditions
+                <h3>Read our terms and conditions</h3>
+
+                <label>I have read and accept the terms and conditions
                     <input
                         type='checkbox'
-                        name='Terms and conditions'
+                        name='tos'
                         checked={values.tos}
                         onChange={onCheckboxChange}
                     />

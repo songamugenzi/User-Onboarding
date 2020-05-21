@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { v4 as uuid } from 'uuid';
 import PluggedForm from './PluggedForm';
+import User from './User'
 import formSchema from '../validation/formSchema'
 import axios from 'axios'
 import * as yup from 'yup'
@@ -14,7 +14,7 @@ function App() {
     name: '',
     email: '',
     password: '',
-    tos: 'Read our terms and conditions',
+    tos: false,
   }
 
   const initialFormErrors = {
@@ -40,7 +40,6 @@ function App() {
   const getUsers = () => {
     axios.get('https://reqres.in/api/users')
       .then(res => {
-        // console.log(res.data.data)
         const userData = res.data.data
         setUsers(userData)
       })
@@ -52,7 +51,9 @@ function App() {
   const postNewUser = newUser => {
     axios.post('https://reqres.in/api/users', newUser)
       .then(res => {
-        setUsers([res.data, ...users])
+        const newUserInfo = res.data
+        setUsers([newUserInfo, ...users])
+        // console.log(newUserInfo)
       })
       .catch(err => {
         debugger
@@ -67,6 +68,7 @@ function App() {
   ////////////////////////
   const onInputChange = evt => {
     const name = evt.target.name
+    // const fullName = {evt.target.first_name, evt.target.last_name}
     const value = evt.target.value
 
     yup
@@ -91,14 +93,16 @@ function App() {
     evt.preventDefault()
 
     const newUser = {
-      name: formValues.name.trim(),
+      first_name: formValues.name.split(' ')[0].trim(),
+      last_name: formValues.name.split(' ')[1].trim(),
       email: formValues.email.trim(),
       password: formValues.password,
-      tos: formValues.tos,
+      // tos: formValues.tos,
     }
 
     postNewUser(newUser)
   }
+  // console.log(formValues)
 
   //////////////////////
   //// SIDE EFFECTS ////
@@ -131,12 +135,13 @@ function App() {
         onCheckboxChange={onCheckboxChange}
       />
 
-      {/* {
+      {
         users.map(user => {
-          return user
+          return (
+            <User key={user.id} details={user} />
+          )
         })
-      } */}
-
+      }
     </div>
   );
 }
