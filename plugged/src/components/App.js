@@ -53,7 +53,6 @@ function App() {
       .then(res => {
         const newUserInfo = res.data
         setUsers([newUserInfo, ...users])
-        // console.log(newUserInfo)
       })
       .catch(err => {
         debugger
@@ -68,7 +67,6 @@ function App() {
   ////////////////////////
   const onInputChange = evt => {
     const name = evt.target.name
-    // const fullName = {evt.target.first_name, evt.target.last_name}
     const value = evt.target.value
 
     yup
@@ -97,12 +95,10 @@ function App() {
       last_name: formValues.name.split(' ')[1].trim(),
       email: formValues.email.trim(),
       password: formValues.password,
-      // tos: formValues.tos,
     }
 
     postNewUser(newUser)
   }
-  // console.log(formValues)
 
   //////////////////////
   //// SIDE EFFECTS ////
@@ -122,7 +118,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className='App-title'>
-          <h2>Plugged 🔌</h2>
+          <h2>Plugged<span role='img' aria-label='plug icon'>🔌</span></h2>
         </div>
       </header>
 
