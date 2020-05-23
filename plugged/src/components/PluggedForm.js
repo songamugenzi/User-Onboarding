@@ -14,7 +14,7 @@ export default function PluggedForm(props) {
         <form className='form container' onSubmit={onSubmit}>
             <div className='form-group submit'>
                 <h3>Add new user</h3>
-                <button disabled={disabled}>submit</button>
+                <button disabled={disabled} className='submit'>submit</button>
 
                 <div className='errors'>
                     <div>{errors.name}</div>
